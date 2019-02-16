@@ -40,10 +40,15 @@ class ViewController: UIViewController {
             return
         }
         expression = newText
+        operators += symbString
     }
     
     @IBAction func equalsButtonPressed(_ sender: UIButton) {
+        let separatorSet = CharacterSet(charactersIn: operators)
+        var fullExpression: [String] = expression.components(separatedBy: separatorSet)
+        print(fullExpression)
     }
+    
     
     
     @IBAction func numberButtonPressed(_ sender: UIButton) {

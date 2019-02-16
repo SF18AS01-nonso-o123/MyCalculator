@@ -19,13 +19,27 @@ class ViewController: UIViewController {
     var operators: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        displayLabel.text = "0"
         // Do any additional setup after loading the view, typically from a nib.
     }
 
     @IBAction func clearButtonPressed(_ sender: UIButton) {
+        displayLabel.text = "0"
     }
     
     @IBAction func operatorButtonPressed(_ sender: UIButton) {
+        guard let text: String = displayLabel.text else {
+            return
+        }
+        guard let symbString: String = sender.title(for: .normal) else{
+            return
+        }
+        displayLabel.text = text + symbString
+        
+        guard let newText: String = displayLabel.text else{
+            return
+        }
+        expression = newText
     }
     
     @IBAction func equalsButtonPressed(_ sender: UIButton) {
@@ -33,6 +47,22 @@ class ViewController: UIViewController {
     
     
     @IBAction func numberButtonPressed(_ sender: UIButton) {
+        guard let text: String = displayLabel.text else {
+            return
+        }
+        
+        guard let numString: String = sender.title(for: .normal) else{
+            return
+        }
+        if text != "0"{
+            displayLabel.text = text + numString    //append previous text on label to new text
+        } else{
+            displayLabel.text = numString
+        }
+        
+        if let text = displayLabel.text{
+            expression = text
+        }
     }
     
     
